@@ -1,0 +1,13 @@
+body {
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#board {
+    background-color: black;
+}
+
+#button_{
+    margin-top: 30px;
+    font-size: 2rem;
+}
