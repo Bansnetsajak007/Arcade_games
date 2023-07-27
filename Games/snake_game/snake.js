@@ -10,6 +10,10 @@ let context;
 let score = document.getElementById('point');
 var score_value = 0;
 
+//variables for game over
+const over = document.getElementById('game_over');
+const p = document.createElement("p");
+
 
 //snake head
 let snakeX = blockSize * 5;
@@ -31,11 +35,25 @@ window.onload = function() {
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d"); //used for drawing on the board
-
+    p.textContent = "Press any arrow key to continue...";
+    if(gameOver === false){
+        over.appendChild(p);        
+    }
     placeFood();
+
+    function handelArrowPress(event){
+        if(event.key.includes("Arrow")){
+            over.textContent = ""; // Remove the text content of the 'over' element
+            // Remove the event listener
+            document.removeEventListener("keyup", handelArrowPress); 
+        }
+    }
+
     document.addEventListener("keyup", changeDirection);
+    document.addEventListener("keyup", handelArrowPress);
+
     // update();
-    setInterval(update, 1000/10); //100 milliseconds
+    setInterval(update, (1000/10)); //100 milliseconds
 }
 
 function update() {
@@ -73,14 +91,17 @@ function update() {
     //game over conditions
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
         gameOver = true;
-        alert("Game Over");
+        p.textContent = "GAME OVER!!!!"
     }
-
+    
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
-            alert("Game Over");
+        p.textContent = "GAME OVER!!!!"
         }
+    }
+    if(gameOver){
+        over.appendChild(p);
     }
 }
 
