@@ -10,5 +10,43 @@ body {
 
 .btn{
     margin-top: 30px;
-    font-size: 20px;
+}
+
+#load{
+        margin-top: 150px;
+        font-size: 2rem;    
+        position: absolute;
+        left: 72%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+
+}
+
+#Start{
+        margin-top: 150px;
+        font-size: 2rem;    
+        position: absolute;
+        left: 28%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+
+}
+
+#jump{
+    margin-top: 116px;
+    font-size: 2rem;
+    left: 46%;
+    position: absolute;
+}
+
+
+
+#command{
+    font-size: 3rem;
+}
+
+
+#mainframe{
+    width: 750px;
+    height: 250px;
 }

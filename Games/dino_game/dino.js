@@ -1,5 +1,32 @@
+let game_start = false;
+let msg = document.getElementById('command');
 
-let button = document.getElementById("load");
+
+document.getElementById('Start').addEventListener('click', function(){
+    let main = document.getElementById('main');
+    if(!game_start){
+        game_start = true;
+        main.remove();
+        initializeGame();
+        msg.textContent = "";
+    }
+});
+
+document.getElementById('Start').addEventListener("click", function(){
+    let play = document.getElementById('play');
+
+    if(play.style.display === "none"){
+        play.style.display ="block";
+    }
+
+})
+
+//moving dino using jump button
+
+document.getElementById("jump").addEventListener("click", function(){
+    velocityY = -11;
+})
+
 
 //board
 let board;
@@ -37,20 +64,20 @@ let cactus2Img;
 let cactus3Img;
 
 //physics
-let velocityX = -8; //cactus moving left speed
+let velocityX = -10; //cactus moving left speed
 let velocityY = 0;
 let gravity = .4;
 
 let gameOver = false;
 let score = 0;
 
-window.onload = function() {
+
+function initializeGame() {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
 
     context = board.getContext("2d"); //used for drawing on the board
-
 
     dinoImg = new Image();
     dinoImg.src = "./img/dino.png";
@@ -72,6 +99,11 @@ window.onload = function() {
     document.addEventListener("keydown", moveDino);
 }
 
+
+// window.onload = function() {
+//     initializeGame();
+// }
+
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
@@ -83,6 +115,9 @@ function update() {
     velocityY += gravity;
     dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
     context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+
+
+
 
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
@@ -97,10 +132,6 @@ function update() {
                 context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
             }
         }
-
-        if(gameOver === true){
-            button.addEventListener("click", relode_page);
-        }
     }
 
     //score
@@ -108,6 +139,9 @@ function update() {
     context.font="20px courier";
     score++;
     context.fillText(score, 5, 20);
+
+
+
 }
 
 function moveDino(e) {
@@ -115,16 +149,21 @@ function moveDino(e) {
         return;
     }
 
+
     if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
-        //jump
         velocityY = -10;
     }
-    else if (e.code == "ArrowDown" && dino.y == dinoY) {
-        //duck
-    }
 
+        else if (dinoImg.src ===  "./img/dino-duck1.png" && e.code === "ArrowUp"){
+            // velocityY = -0
+            dinoImg.src = "./img/dino.png";
+            dinoImg.onload = function() {
+                context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+                
+            }
+    }  
 }
-
+        
 function placeCactus() {
     if (gameOver) {
         return;
@@ -169,10 +208,6 @@ function detectCollision(a, b) {
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
 
-// button.addEventListener('click', relode_page);
-function relode_page(){
-    location.reload();
-    console.log("reloded successfully")
-}
+
 
 
