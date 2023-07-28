@@ -1,35 +1,15 @@
-img{
-    height: 170px;
-}
 
-#heading {
-    text-align: center;
-    margin-bottom: 50px
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-}
-
-.main-body {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 10px;
-}
-
-
-  body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
     color: #333;
+    padding: 20px; 
 }
+
 
 h1 {
     text-align: center;
-    margin: 30px 0;
+    margin: 30px 20px;
 }
 
 .card {
@@ -71,30 +51,25 @@ h1 {
     background-color: #0056b3;
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-    max-width: 1000px;
-}
+/* Remove the .row and .col-sm-12 classes */
 
+/* Adjust the .col-lg-4 class for responsiveness */
 .col-lg-4 {
-    flex: 0 0 33.3333%;
-    max-width: 33.3333%;
+    flex: 0 0 100%; /* Full width on small screens */
+    max-width: 100%;
 }
 
+/* Responsive styling using Bootstrap classes */
 @media (min-width: 576px) {
-    .col-sm-12 {
-        flex: 0 0 50%;
+    .col-lg-4 {
+        flex: 0 0 50%; /* Half width on medium screens */
         max-width: 50%;
     }
 }
 
 @media (min-width: 768px) {
-    .col-sm-12 {
-        flex: 0 0 33.3333%;
+    .col-lg-4 {
+        flex: 0 0 33.3333%; /* One-third width on large screens */
         max-width: 33.3333%;
     }
 }
-  
